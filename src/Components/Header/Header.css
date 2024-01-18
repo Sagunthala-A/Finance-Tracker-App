@@ -1,0 +1,25 @@
+.navbar{
+    background-color: var(--theme);
+    color:var(--white);
+    padding: 1.1rem 2rem;
+    position: sticky;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar__logo{
+    font-weight: 500;
+    font-size: 1.2rem;
+}
+
+.navbar__logout{
+    opacity:0.8;
+    font-weight: 500;
+    cursor:pointer;
+}
+
+.navbar__logout:hover{
+    opacity:1;
+    transition: all 300ms;
+}

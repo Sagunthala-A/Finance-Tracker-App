@@ -1,0 +1,23 @@
+.signUp__wrapper{
+    box-shadow: var(--boxShadow);
+    border-radius: 1rem;
+    width:100vw;
+    max-width: 500px;
+    padding:2rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.signUp__wrapper > p{
+    text-align: center;
+    font-weight: 500;
+    font-size: 1.4rem;
+    padding:.3rem 0;
+}
+
+.signUp__wrapper > p >span{
+    color:var(--theme)
+}
+
+
