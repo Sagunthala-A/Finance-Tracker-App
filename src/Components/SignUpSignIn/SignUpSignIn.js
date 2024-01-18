@@ -99,7 +99,6 @@ const SignUpSignIn = () => {
                 isBlue={true}
             />
         </form>
-
     </div>
   )
 }
