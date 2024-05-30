@@ -20,4 +20,9 @@
     color:var(--theme)
 }
 
+.signUp__pTag{
+    text-align: center;
+    font-weight: 400;
+}
+
 

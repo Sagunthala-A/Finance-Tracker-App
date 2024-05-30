@@ -16,10 +16,17 @@
 .navbar__logout{
     opacity:0.8;
     font-weight: 500;
-    cursor:pointer;
 }
 
 .navbar__logout:hover{
     opacity:1;
     transition: all 300ms;
+}
+
+.logout__wrapper{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap:1rem;
+    cursor: pointer;
 }
