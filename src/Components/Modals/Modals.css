@@ -1,0 +1,41 @@
+.input-wrapper input,
+.custom-input {
+  border: 0px;
+  border-bottom: 1px solid #000;
+  padding: 0.5rem 0rem;
+  width: 100%;
+  border-radius: 0;
+}
+
+.custom-input {
+  margin-top: -1rem !important;
+}
+
+.input-wrapper input::placeholder,
+.custom-input::placeholder {
+  color: rgba(0, 0, 0, 0.5);
+}
+
+.input-wrapper input:focus,
+.custom-input:focus {
+  outline: none;
+  opacity: 1;
+  transition: all 0.3s;
+}
+
+.select-input-2 > div {
+  border-width: 0px !important;
+  border-bottom-width: 1px !important;
+  border-radius: 0 !important;
+  border-color: #000 !important;
+}
+
+/* .ant-modal .ant-modal-header{
+    padding: 5px 16px;
+    margin-bottom:35px;
+    font-size: .2rem !important;
+} */
+
+.ant-modal-title{
+    color:red !important;
+} 

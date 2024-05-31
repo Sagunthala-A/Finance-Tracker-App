@@ -1,17 +1,75 @@
 import React from 'react';
-import {  Modal } from 'antd';
-import Input from '../Input/Input';
+import './Modals.css';
+import { Modal, Form, Input, Select, DatePicker, Button } from 'antd';
 
 function AddExpenseModal({ handleExpenseCancel, isExpenseModalVisible }) {
+  const [form] = Form.useForm();
   return (
     <div>
-      AddExpenseModl
       <Modal
         title="Add Expense"
         visible={isExpenseModalVisible}
         onCancel={handleExpenseCancel}
+        footer={null}
       >
-        <Input/>
+        <Form layout="vertical" form={form}>
+          <Form.Item
+            style={{ fontWeight: 600 }}
+            label="Name"
+            name="name"
+            rules={[
+              {
+                required: true,
+                message: "Please input the name of the transaction!",
+              },
+            ]}
+          >
+            <Input type="text" className="custom-input" />
+          </Form.Item>
+
+          <Form.Item
+            style={{ fontWeight: 600 }}
+            label="Amount"
+            name="amount"
+            rules={[
+              {
+                required: true,
+                message: "Please input the expense amount!",
+              },
+            ]}
+          >
+            <Input type="text" className="custom-input" />
+          </Form.Item>
+
+          <Form.Item
+            style={{ fontWeight: 600 }}
+            label="Date"
+            name="date"
+            rules={[
+              { required: true, message: "Please select the expense date!" },
+            ]}
+          >
+            <DatePicker className="custom-input" format="YYYY-MM-DD" />
+          </Form.Item>
+
+          <Form.Item
+            label="Tag"
+            name="tag"
+            style={{ fontWeight: 600 }}
+            rules={[{ required: true, message: "Please select a tag!" }]}
+          >
+            <Select className="select-input-2">
+              <Select.Option value="food">Food</Select.Option>
+              <Select.Option value="education">Education</Select.Option>
+              <Select.Option value="office">Office</Select.Option>
+              <Select.Option value="other">Other</Select.Option>
+            </Select>
+          </Form.Item>
+
+          <Button className="signup__btn blue" style={{margin:"1rem auto",width:"90%",padding:"1.2rem 0"}}>
+            Add Expense
+          </Button>
+        </Form>
       </Modal>
     </div>
   );
