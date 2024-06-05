@@ -5,6 +5,7 @@
   padding: 0.5rem 0rem;
   width: 100%;
   border-radius: 0;
+  font-family: "Montserrat", sans-serif !important;
 }
 
 .custom-input {
@@ -37,5 +38,12 @@
 } */
 
 .ant-modal-title{
-    color:red !important;
+  padding: 1rem 0;
+  font-weight: 500 !important;
+  font-size: 1.2rem !important;
+  font-family: "Montserrat", sans-serif;
 } 
+
+.ant-form{
+  font-family: "Montserrat", sans-serif !important;
+}

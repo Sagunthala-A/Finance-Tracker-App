@@ -2,7 +2,7 @@ import React from 'react';
 import './Modals.css';
 import { Modal, Form, Input, Select, DatePicker, Button } from 'antd';
 
-function AddExpenseModal({ handleExpenseCancel, isExpenseModalVisible }) {
+function AddExpenseModal({ handleExpenseCancel, isExpenseModalVisible,onFinish }) {
   const [form] = Form.useForm();
   return (
     <div>
@@ -12,7 +12,15 @@ function AddExpenseModal({ handleExpenseCancel, isExpenseModalVisible }) {
         onCancel={handleExpenseCancel}
         footer={null}
       >
-        <Form layout="vertical" form={form}>
+        <Form
+          layout="vertical"
+          form={form}
+          onFinish={(values) => {
+            onFinish(values, "expense");
+            form.resetFields();
+            handleExpenseCancel();
+          }}
+        >
           <Form.Item
             style={{ fontWeight: 600 }}
             label="Name"
@@ -66,7 +74,11 @@ function AddExpenseModal({ handleExpenseCancel, isExpenseModalVisible }) {
             </Select>
           </Form.Item>
 
-          <Button className="signup__btn blue" style={{margin:"1rem auto",width:"90%",padding:"1.2rem 0"}}>
+          <Button
+            className="signup__btn blue"
+            htmlType="submit"
+            style={{ margin: "1rem auto", width: "90%", padding: "1.2rem 0" }}
+          >
             Add Expense
           </Button>
         </Form>

@@ -3,7 +3,7 @@ import './Modals.css';
 import { Button, DatePicker, Form, Input, Modal, Select } from 'antd';
 import { useForm } from 'antd/es/form/Form';
 
-function AddIncomeModal({isIncomeModalVisible,handleIncomeCancel}) {
+function AddIncomeModal({isIncomeModalVisible,handleIncomeCancel,onFinish}) {
   const [form] = Form.useForm();
   return (
     <div>
@@ -13,7 +13,15 @@ function AddIncomeModal({isIncomeModalVisible,handleIncomeCancel}) {
         onCancel={handleIncomeCancel}
         footer={null}
       >
-        <Form layout="vertical" form={form}>
+        <Form
+          layout="vertical"
+          form={form}
+          onFinish={(values) => {
+            onFinish(values, "income");
+            form.resetFields();
+            handleIncomeCancel(); 
+          }}
+        >
           <Form.Item
             style={{ fontWeight: 600 }}
             label="Name"
@@ -69,6 +77,7 @@ function AddIncomeModal({isIncomeModalVisible,handleIncomeCancel}) {
 
           <Button
             className="signup__btn blue"
+            htmlType="submit"
             style={{ margin: "1rem auto", width: "90%", padding: "1.2rem 0" }}
           >
             Add Expense
