@@ -51,6 +51,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    /* justify-content: flex-start; */
     margin:1rem .6rem 2.5rem .6rem;
     font-family: 'Montserrat', sans-serif !important;
 }
@@ -63,7 +64,16 @@
     text-transform: capitalize !important;
 }
 
+.input-radio{
+
+}
+
 .radioGroups__wrapper > h2{
     font-weight: 400;
 }
 
+.import-input{
+    width: 0rem !important;
+    height: 0rem !important;
+    display: none !important;
+}

@@ -3,11 +3,21 @@ import Header from '../Header/Header';
 import Cards from '../Cards/Cards.js';
 import AddIncomeModal from '../Modals/AddIncomeModal.js';
 import AddExpenseModal from '../Modals/AddExpenseModal.js';
-import { addDoc, collection, getDocs, query } from 'firebase/firestore';
+import {
+  addDoc,
+  collection,
+  deleteDoc,
+  getDocs,
+  query,
+  doc,
+  writeBatch,
+} from "firebase/firestore";
 import { toast } from 'react-toastify';
 import { auth, db } from '../../firebase.js';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import TransactionsTable from '../TransactionsTable/TransactionsTable.js';
+import Chart from '../Chart/Chart.js';
+import { unparse } from 'papaparse';
 
 const Dashboard = () => {
 
@@ -41,6 +51,31 @@ const Dashboard = () => {
     }
     function handleExpenseCancel(){
       setIsExpenseModalVisible(false);
+    }
+
+    async function resetBalance() {
+      if (currentBalance == 0) {
+        toast.success("Your balance is already zero");
+        return;
+      }
+        if (user) {
+          const q = query(collection(db, `users/${user.uid}/transactions`));
+          const querySnapshot = await getDocs(q);
+          const batch = writeBatch(db); // Correctly use writeBatch
+
+          querySnapshot.forEach((doc) => {
+            batch.delete(doc.ref);
+          });
+
+          try {
+            await batch.commit();
+            setTransactions([]);
+            toast.success("All transactions deleted and balance reset!");
+          } catch (e) {
+            console.error("Error deleting transactions: ", e);
+            toast.error("Couldn't reset balance");
+          }
+        }
     }
 
     function onFinish(values,type){
@@ -108,6 +143,20 @@ const Dashboard = () => {
          setCurrentBalance(totalIncome - totalExpense);
       }
 
+       function exportToCsv() {
+         const csv = unparse(transactions, {
+           fields: ["name", "type", "date", "amount", "tag"],
+         });
+         const blob = new Blob([csv], { type: "text/csv;charset=utf-8;" });
+         const url = URL.createObjectURL(blob);
+         const link = document.createElement("a");
+         link.href = url;
+         link.download = "transactions.csv";
+         document.body.appendChild(link);
+         link.click();
+         document.body.removeChild(link);
+       }
+
 
 
   return (
@@ -120,6 +169,7 @@ const Dashboard = () => {
         income={income}
         expense={expense}
         currentBalance={currentBalance}
+        resetBalance={resetBalance}
       />
       <AddIncomeModal
         isIncomeModalVisible={isIncomeModalVisible}
@@ -131,8 +181,15 @@ const Dashboard = () => {
         isExpenseModalVisible={isExpenseModalVisible}
         onFinish={onFinish}
       />
-
-      <TransactionsTable transactions={transactions}/>
+      {
+        transactions.length > 0 ? (<Chart transactions={transactions} />):(<p>No transaction</p>)
+      }
+      <TransactionsTable
+        transactions={transactions}
+        addTransaction={addTransaction}
+        fetchTransactions={fetchTransactions}
+        exportToCsv={exportToCsv}
+      />
     </div>
   );
 }

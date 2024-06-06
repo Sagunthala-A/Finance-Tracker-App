@@ -3,7 +3,14 @@ import { Card, Row } from "antd";
 import './Cards.css';
 import Button from '../Button/Button';
 
-function Cards({ showIncomeModal,showExpenseModal,income,expense,currentBalance}) {
+function Cards({
+  showIncomeModal,
+  showExpenseModal,
+  income,
+  expense,
+  currentBalance,
+  resetBalance,
+}) {
   const style = {
     margin: "0",
     marginTop: "1rem",
@@ -13,7 +20,12 @@ function Cards({ showIncomeModal,showExpenseModal,income,expense,currentBalance}
     <Row className="cards__row">
       <Card className="cards__card" title="Current Balance">
         <p> ₹{currentBalance}</p>
-        <Button isBlue={true} style={style} text="Reset Balance" />
+        <Button
+          isBlue={true}
+          style={style}
+          text="Reset Balance"
+          onClick={resetBalance}
+        />
       </Card>
       <Card className="cards__card" title="Total Income">
         <p>₹{income}</p>
