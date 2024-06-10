@@ -42,16 +42,28 @@ function Chart({transactions}) {
   return (
     // <div className="table__wrapper chart__line">
     // <Row gutter={16}>
-      <div className="charts__wrapper">
-        <div className="table__wrapper chart__line">
-          <h2>Financial Statistics</h2>
-          <Line {...props} />
-        </div>
-        <div className="table__wrapper pie__line">
-          <h2>Total Spends</h2>
-          <Pie {...props2} />
-        </div>
+    <div className="charts__wrapper">
+      <div className="table__wrapper chart__line">
+        <h2>Financial Statistics</h2>
+        <Line {...props} />
       </div>
+      <div className="table__wrapper pie__line">
+        <h2>Total Spends</h2>
+        {spendingData.length > 0 ? (
+          <Pie {...props2} />
+        ) : (
+          <p
+            style={{
+              marginTop: "1.5rem",
+              fontSize: "1.1rem",
+              fontWeight: "500",
+            }}
+          >
+            No spends yet
+          </p>
+        )}
+      </div>
+    </div>
     // </Row>
     // </div>
   );

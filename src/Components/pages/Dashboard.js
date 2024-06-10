@@ -18,6 +18,8 @@ import { useAuthState } from 'react-firebase-hooks/auth';
 import TransactionsTable from '../TransactionsTable/TransactionsTable.js';
 import Chart from '../Chart/Chart.js';
 import { unparse } from 'papaparse';
+import NoTransaction from '../NoTransaction/NoTransaction.js';
+import Loader from '../Loader/Loader.js';
 
 const Dashboard = () => {
 
@@ -29,6 +31,7 @@ const Dashboard = () => {
     const [income,setIncome] = useState(0);
     const [expense,setExpense] = useState(0);
     const [currentBalance,setCurrentBalance] = useState(0);
+    const [loading,setLoading] = useState(true);
 
     useEffect(()=>{
       // fetchTransactions()
@@ -59,6 +62,7 @@ const Dashboard = () => {
         return;
       }
         if (user) {
+          setLoading(true);
           const q = query(collection(db, `users/${user.uid}/transactions`));
           const querySnapshot = await getDocs(q);
           const batch = writeBatch(db); // Correctly use writeBatch
@@ -71,9 +75,12 @@ const Dashboard = () => {
             await batch.commit();
             setTransactions([]);
             toast.success("All transactions deleted and balance reset!");
+            setLoading(false);
+            
           } catch (e) {
             console.error("Error deleting transactions: ", e);
             toast.error("Couldn't reset balance");
+            setLoading(false);
           }
         }
     }
@@ -94,6 +101,7 @@ const Dashboard = () => {
     }
 
       async function addTransaction(transaction, many) {
+        setLoading(true);
         try {
           const docRef = await addDoc(
             collection(db, `users/${user.uid}/transactions`),
@@ -103,16 +111,18 @@ const Dashboard = () => {
           if (!many) {
             toast.success("Transaction Added!");
           }
+          setLoading(false);
         } catch (e) {
           console.error("Error adding document: ", e);
           if (!many) {
             toast.error("Couldn't add transaction");
           }
+          setLoading(false);
         }
       }
 
       async function fetchTransactions() {
-        // setLoading(true);
+        setLoading(true);
         if (user) {
           const q = query(collection(db, `users/${user.uid}/transactions`));
           const querySnapshot = await getDocs(q);
@@ -123,8 +133,9 @@ const Dashboard = () => {
           });
           setTransactions(transactionsArray);
           toast.success("Transactions Fetched!");
+          // setLoading(false);
         }
-        // setLoading(false);
+        setLoading(false);
       }
 
       function calculateBalance(){
@@ -160,37 +171,48 @@ const Dashboard = () => {
 
 
   return (
-    <div>
-      <Header />
-      <Cards
-        setIsIncomeModalVisible={setIsIncomeModalVisible}
-        showIncomeModal={showIncomeModal}
-        showExpenseModal={showExpenseModal}
-        income={income}
-        expense={expense}
-        currentBalance={currentBalance}
-        resetBalance={resetBalance}
-      />
-      <AddIncomeModal
-        isIncomeModalVisible={isIncomeModalVisible}
-        handleIncomeCancel={handleIncomeCancel}
-        onFinish={onFinish}
-      />
-      <AddExpenseModal
-        handleExpenseCancel={handleExpenseCancel}
-        isExpenseModalVisible={isExpenseModalVisible}
-        onFinish={onFinish}
-      />
-      {
-        transactions.length > 0 ? (<Chart transactions={transactions} />):(<p>No transaction</p>)
-      }
-      <TransactionsTable
-        transactions={transactions}
-        addTransaction={addTransaction}
-        fetchTransactions={fetchTransactions}
-        exportToCsv={exportToCsv}
-      />
-    </div>
+    <>
+      {loading ? (
+        <div>
+          <Header />
+          <Loader />
+        </div>
+      ) : (
+        <div>
+          <Header />
+          <Cards
+            setIsIncomeModalVisible={setIsIncomeModalVisible}
+            showIncomeModal={showIncomeModal}
+            showExpenseModal={showExpenseModal}
+            income={income}
+            expense={expense}
+            currentBalance={currentBalance}
+            resetBalance={resetBalance}
+          />
+          <AddIncomeModal
+            isIncomeModalVisible={isIncomeModalVisible}
+            handleIncomeCancel={handleIncomeCancel}
+            onFinish={onFinish}
+          />
+          <AddExpenseModal
+            handleExpenseCancel={handleExpenseCancel}
+            isExpenseModalVisible={isExpenseModalVisible}
+            onFinish={onFinish}
+          />
+          {transactions.length > 0 ? (
+            <Chart transactions={transactions} />
+          ) : (
+            <NoTransaction />
+          )}
+          <TransactionsTable
+            transactions={transactions}
+            addTransaction={addTransaction}
+            fetchTransactions={fetchTransactions}
+            exportToCsv={exportToCsv}
+          />
+        </div>
+      )}
+    </>
   );
 }
 

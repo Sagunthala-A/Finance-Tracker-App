@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Header from '../Header/Header'
 import SignUpSignIn from '../SignUpSignIn/SignUpSignIn'
 
@@ -8,7 +8,7 @@ const Signup = () => {
     <div>
         <Header/>
         <div className="signInSignUp__wrapper">
-            <SignUpSignIn />
+            <SignUpSignIn/>
         </div>
         
     </div>

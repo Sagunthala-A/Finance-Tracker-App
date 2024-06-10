@@ -69,21 +69,36 @@ function TransactionsTable({
     }
   }
 
-  const filteredTransactions = transactions.filter(
-    (trans) =>
-      trans.name.toLowerCase().includes(search.toLowerCase()) &&
-      trans.type.includes(typeFilter)
-  );
+const filteredTransactions =
+  transactions.length > 0
+    ? transactions.filter(
+        (trans) =>
+          trans.name &&
+          trans.name.toLowerCase().includes(search.toLowerCase()) &&
+          (typeFilter ? trans.type === typeFilter : true)
+      )
+    : [];
 
-  const sortedTransactions = [...filteredTransactions].sort((a, b) => {
-    if (sortKey === "date") {
-      return new Date(a.date) - new Date(b.date);
-    } else if (sortKey === "amount") {
-      return a.amount - b.amount;
-    } else {
-      return 0;
-    }
-  });
+ const parseDate = (dateString) => {
+   const parts = dateString.split("-");
+   if (parts.length === 3) {
+     return new Date(`${parts[2]}-${parts[1]}-${parts[0]}`);
+   }
+   return new Date(dateString);
+ };
+
+ const sortedTransactions =
+   filteredTransactions.length > 0
+     ? [...filteredTransactions].sort((a, b) => {
+         if (sortKey === "date") {
+           return parseDate(a.date) - parseDate(b.date);
+         } else if (sortKey === "amount") {
+           return a.amount - b.amount;
+         } else {
+           return 0;
+         }
+       })
+     : [];
 
   return (
     <div className="transactionsTable__wrapper">

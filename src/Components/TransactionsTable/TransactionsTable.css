@@ -34,7 +34,7 @@
 
 .select__wrapper {
   width: 25%;
-  margin-right: 10px;
+  /* margin-right: 10px; */
   display: flex;
   align-items: center;
   box-shadow:var(--boxShadow);

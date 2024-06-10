@@ -3,18 +3,29 @@
     align-items: center;
     justify-content: space-between;
     margin: .5rem;
-    gap:16px;
+    /* gap:16px; */
     font-weight: 500;
     font-size: 66px !important;
+
+    
+    /* justify-content: flex-start;
+    margin:2rem 2.5rem;
+    gap:1rem; */
 }
 
 .cards__card{
     box-shadow: var(--boxShadow);
     margin: 2rem;
     border-radius: 0.5rem;
-    min-width: 400px;
+    min-width: 200px;
+    max-width: 500px;
     flex: 1;
+    
     font-family: "Montserrat", sans-serif !important;
+
+    /* min-width:200px;
+    width:400px;
+    margin:0; */
 }
 
 /* ant design default card component className */
@@ -22,4 +33,32 @@
     font-size: 1.4rem;
     font-weight: 500;
     /* font-family: "Montserrat", sans-serif !important; */
+}
+
+@media screen and (max-width: 1024px) {
+.cards__row{
+    /* flex-direction: column;
+    align-items: center;
+    justify-content: center; */
+    flex-direction: column;
+    /* gap:2px; */
+}
+
+/* .cards__card{
+    box-shadow: var(--boxShadow);
+    margin: 2rem;
+    border-radius: 0.5rem;
+    min-width: 400px;
+    max-width: 400px;
+    width:600px !important;
+    flex: 1;
+    } */
+
+        .cards__card {
+        box-shadow: var(--boxShadow);
+        width:auto !important;
+        flex-grow: 1 !important;
+        margin:3rem auto;
+        min-width: 580px;
+    }
 }

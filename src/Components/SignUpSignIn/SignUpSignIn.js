@@ -28,8 +28,12 @@ const SignUpSignIn = () => {
     setLoading(true);
     if (name != "" && email != "" && password != "" && confirmPassword != "") {
       if (password === confirmPassword) {
-          try {
-          const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        try {
+          const userCredential = await createUserWithEmailAndPassword(
+            auth,
+            email,
+            password
+          );
           const user = userCredential.user;
           await createUserDocument(user);
           toast.success("Signed Up successfully!");
@@ -39,14 +43,13 @@ const SignUpSignIn = () => {
           setPassword("");
           setConfirmPassword("");
           navigate("/dashboard");
-          }
-          catch(error) {
-            const errorCode = error.code;
-            const errorMessage = error.message;
-            toast.error(errorMessage);
-            setLoading(false);
-            // ..
-          }
+        } catch (error) {
+          const errorCode = error.code;
+          const errorMessage = error.message;
+          toast.error(errorMessage);
+          setLoading(false);
+          // ..
+        }
       } else {
         toast.error("Password and Confirm Password must be the same");
         setLoading(false);
@@ -62,21 +65,24 @@ const SignUpSignIn = () => {
     setLoading(true);
     const auth = getAuth();
     if (email !== "" && password !== "") {
-        try{
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            const user = userCredential.user;
-            toast.success("Logged In Successfully!");
-            setLoading(false);
-            setEmail("");
-            setPassword("");
-            navigate("/dashboard");
-        }
-        catch(error) {
-          const errorCode = error.code;
-          const errorMessage = error.message;
-          toast.error(errorMessage);
-          setLoading(false);
-        };
+      try {
+        const userCredential = await signInWithEmailAndPassword(
+          auth,
+          email,
+          password
+        );
+        const user = userCredential.user;
+        toast.success("Logged In Successfully!");
+        setLoading(false);
+        setEmail("");
+        setPassword("");
+        navigate("/dashboard");
+      } catch (error) {
+        const errorCode = error.code;
+        const errorMessage = error.message;
+        toast.error(errorMessage);
+        setLoading(false);
+      }
     } else {
       toast.error("All fields are mandatory");
       setLoading(false);
@@ -111,20 +117,19 @@ const SignUpSignIn = () => {
 
   const signInWithGoogle = async () => {
     setLoading(true);
-    try{
-        const result = await signInWithPopup(auth, provider);
-        const user = result.user;
-        await createUserDocument(user);
-        toast.success("User Authenticated Successfully!");
-        setLoading(false);
-        navigate("/dashboard");
+    try {
+      const result = await signInWithPopup(auth, provider);
+      const user = result.user;
+      await createUserDocument(user);
+      toast.success("User Authenticated Successfully!");
+      setLoading(false);
+      navigate("/dashboard");
+    } catch (error) {
+      setLoading(false);
+      toast.error(error.message);
+      console.error("Error creating user document: ", error.message);
     }
-    catch(error){
-        setLoading(false);
-        toast.error(error.message);
-        console.error("Error creating user document: ",error.message);
-    }
-  }; 
+  };
 
   return (
     <div className="signUp__wrapper">
@@ -244,6 +249,6 @@ const SignUpSignIn = () => {
       )}
     </div>
   );
-}
+};
 
 export default SignUpSignIn;
