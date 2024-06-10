@@ -127,6 +127,7 @@ const filteredTransactions =
         </Select>
       </div>
       <div className="table__wrapper">
+        <h2 className="responsive__tableHeading">My Transactions</h2>
         <div className="radioGroups__wrapper">
           <h2>My Transactions</h2>
           <Radio.Group
@@ -138,14 +139,7 @@ const filteredTransactions =
             <Radio.Button value="date">Sort by Date</Radio.Button>
             <Radio.Button value="amount">Sort by Amount</Radio.Button>
           </Radio.Group>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "400px",
-            }}
-          >
+          <div className="csv__wrapper">
             <button
               className="signup__btn"
               style={{ width: "100%" }}
@@ -170,7 +164,9 @@ const filteredTransactions =
             />
           </div>
         </div>
-        <Table dataSource={sortedTransactions} columns={columns} />
+        <div className="table">
+          <Table dataSource={sortedTransactions} columns={columns} />
+        </div>
       </div>
     </div>
   );

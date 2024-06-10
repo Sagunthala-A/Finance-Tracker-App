@@ -16,3 +16,24 @@
     font-size: 1.2rem;
     text-align: center;
 }
+
+@media screen and (max-width:600px){
+    .noTransaction__wrapper > img{
+        width:300px;
+        margin:2rem;
+    }
+    .noTransaction__wrapper > p{
+        font-size: 1rem;
+    }
+}
+
+@media screen and (max-width:400px){
+    .noTransaction__wrapper > img{
+        width:190px;
+        margin:2rem;
+    }
+    .noTransaction__wrapper > p{
+        font-size: .8rem;
+        margin:0 2rem;
+    }
+}

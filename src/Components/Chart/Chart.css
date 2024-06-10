@@ -60,12 +60,20 @@
     .charts__wrapper{
         margin-top:0;
     }
+    .chart__line > h2{
+    padding-left: 1.2rem;
+}
 .chart__line{
-        width:80%;
-        padding:1.6rem;
+        /* width:85%; */
+        /* padding:1.6rem; */
+        width:90%;
+        padding:1rem;
+        padding-bottom: 2rem !important;
+        /* padding-left: 0rem; */
     }
     .pie__line{
         width:80%;
         padding:1.6rem;
+        padding-bottom: 2rem !important;
     }
 }

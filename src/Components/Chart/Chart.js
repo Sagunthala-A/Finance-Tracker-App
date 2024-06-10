@@ -10,8 +10,8 @@ function Chart({transactions}) {
 
      const data2 = filteredTrans.map(transaction =>{
         return {
-            date: transaction.date,
-            amount: transaction.amount.toLocaleString()
+          date: transaction.date,
+          amount: transaction.amount.toLocaleString()
         }
      })
     //  console.log(data2)
