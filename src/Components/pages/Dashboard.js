@@ -204,12 +204,12 @@ const Dashboard = () => {
           ) : (
             <NoTransaction />
           )}
-          <TransactionsTable
+          {/* <TransactionsTable
             transactions={transactions}
             addTransaction={addTransaction}
             fetchTransactions={fetchTransactions}
             exportToCsv={exportToCsv}
-          />
+          /> */}
         </div>
       )}
     </>

@@ -55,3 +55,17 @@
         padding:1.6rem;
     }
 }
+
+@media screen and (max-width:400px){
+    .charts__wrapper{
+        margin-top:0;
+    }
+.chart__line{
+        width:80%;
+        padding:1.6rem;
+    }
+    .pie__line{
+        width:80%;
+        padding:1.6rem;
+    }
+}

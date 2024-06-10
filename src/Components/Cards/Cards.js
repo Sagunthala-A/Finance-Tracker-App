@@ -1,6 +1,7 @@
 import React from 'react';
 import { Card, Row } from "antd";
 import './Cards.css';
+// import './newCard.css';
 import Button from '../Button/Button';
 
 function Cards({

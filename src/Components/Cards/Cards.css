@@ -44,21 +44,30 @@
     /* gap:2px; */
 }
 
-/* .cards__card{
-    box-shadow: var(--boxShadow);
-    margin: 2rem;
-    border-radius: 0.5rem;
-    min-width: 400px;
-    max-width: 400px;
-    width:600px !important;
-    flex: 1;
-    } */
-
         .cards__card {
         box-shadow: var(--boxShadow);
-        width:auto !important;
+        /* width:auto !important; */
         flex-grow: 1 !important;
         margin:3rem auto;
         min-width: 580px;
+        width:80% !important;
     }
 }
+
+@media screen and (max-width: 600px){
+    .cards__row{
+        margin-top:2rem;
+    }
+    .cards__card {
+        margin:1.5rem auto;
+        min-width: 200px;
+        /* width:500px !important; */
+        width:80% !important;
+    }
+    .ant-card .ant-card-head-title{
+    font-size: 1rem;
+    font-weight: 500;
+    /* font-family: "Montserrat", sans-serif !important; */
+}
+}
+

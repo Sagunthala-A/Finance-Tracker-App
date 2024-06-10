@@ -1,0 +1,41 @@
+.cards__row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: .5rem;
+    font-weight: 500;
+    font-size: 66px !important;
+}
+
+.cards__card {
+    box-shadow: var(--boxShadow);
+    margin: 2rem;
+    border-radius: 0.5rem;
+    flex: 1 1 300px; /* Allowing the card to grow and shrink with a base size of 300px */
+    font-family: "Montserrat", sans-serif !important;
+}
+
+.ant-card .ant-card-head-title {
+    font-size: 1.4rem;
+    font-weight: 500;
+}
+
+@media screen and (max-width: 1024px) {
+    .cards__row {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .cards__card {
+        width: 80%; /* Using percentage to make it responsive */
+        margin: 1rem 0;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .cards__card {
+        width: 90%; /* More flexible on smaller screens */
+        margin: 1rem 0;
+    }
+}

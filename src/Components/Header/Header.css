@@ -30,3 +30,17 @@
     gap:1rem;
     cursor: pointer;
 }
+
+@media screen and (max-width:400px){
+    .logout__wrapper{
+        gap:.2rem;
+    }
+    .logout__wrapper > img{
+        width:30px;
+        height:30px;
+    }
+    .navbar__logo{
+        font-size: 1rem;
+        margin-left: -1rem;
+    }
+}
