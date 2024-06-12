@@ -5,16 +5,27 @@ import Dashboard from './Components/pages/Dashboard';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
+
 function App() {
   return (
     <>
-    <ToastContainer/>
-      <BrowserRouter>
-        <Routes>
-          <Route path='/' element={<Signup/>}/>
-          <Route path='/dashboard' element= {<Dashboard/>}/>
-        </Routes>
-      </BrowserRouter>
+      {/* <ConfigProvider
+        theme={{
+          token: {
+            // Seed Token
+            colorPrimary: themeColor || "red",
+            borderRadius: 2,
+          },
+        }}
+      > */}
+        <ToastContainer />
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Signup />} />
+            <Route path="/dashboard" element={<Dashboard />} />
+          </Routes>
+        </BrowserRouter>
+      {/* </ConfigProvider> */}
     </>
   );
 }
