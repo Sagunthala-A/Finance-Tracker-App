@@ -69,8 +69,9 @@ function Chart({ transactions, themeColor }) {
               fontWeight: "500",
             }}
           >
-            No spends yet
+            Seems like you haven't spent anything till now...
           </p>
+          
         )}
       </div>
     </div>
