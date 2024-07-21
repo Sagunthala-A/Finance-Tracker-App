@@ -9,15 +9,7 @@ import 'react-toastify/dist/ReactToastify.css';
 function App() {
   return (
     <>
-      {/* <ConfigProvider
-        theme={{
-          token: {
-            // Seed Token
-            colorPrimary: themeColor || "red",
-            borderRadius: 2,
-          },
-        }}
-      > */}
+      
         <ToastContainer />
         <BrowserRouter>
           <Routes>
@@ -25,7 +17,6 @@ function App() {
             <Route path="/dashboard" element={<Dashboard />} />
           </Routes>
         </BrowserRouter>
-      {/* </ConfigProvider> */}
     </>
   );
 }

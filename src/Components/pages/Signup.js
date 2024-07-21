@@ -13,6 +13,7 @@ const Signup = () => {
   useEffect(() => {
     const color =
       localStorage.getItem("themeColorSignUp") ||
+      // document.documentElement => refers to root element that is <html> element
       getComputedStyle(document.documentElement).getPropertyValue("--theme") ||
       "#2970ff";
     setThemeColor(color);

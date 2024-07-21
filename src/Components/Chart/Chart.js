@@ -14,7 +14,8 @@ function Chart({ transactions, themeColor }) {
       amount: transaction.amount.toLocaleString(),
     };
   });
-  //  console.log(data2)
+  
+  // console.log(data2)
   const props = {
     data: data2,
     xField: "date",

@@ -19,7 +19,7 @@ function AddIncomeModal({isIncomeModalVisible,handleIncomeCancel,onFinish}) {
           onFinish={(values) => {
             onFinish(values, "income");
             form.resetFields();
-            handleIncomeCancel(); 
+            handleIncomeCancel();
           }}
         >
           <Form.Item
